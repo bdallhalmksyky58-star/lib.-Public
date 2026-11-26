@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مكتبتنا للنشر والتوزيع</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#14110d;--card:#1f1a13;--tx:#f3e8cf;--gold:#d9b25f;--mut:#a89874;--ln:#3a3022}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font-family:Tajawal,Tahoma,Arial,sans-serif;min-height:100vh;line-height:1.7}
+.pg{display:none;padding:18px;max-width:720px;margin:auto}.pg.on{display:block}.c{text-align:center}
+h1,h2{font-family:Amiri,serif;color:var(--gold);margin:.4em 0}
+.btn{font-family:inherit;background:linear-gradient(135deg,#e6c36f,#b8913f);color:#1a1409;border:0;border-radius:24px;padding:11px 26px;font-size:17px;font-weight:700;cursor:pointer;margin:5px;text-decoration:none;display:inline-block}
+.btn.o{background:none;color:var(--gold);border:1px solid var(--gold)}.btn.s{padding:6px 16px;font-size:14px}.btn:disabled{opacity:.5}
+.card{background:var(--card);border:1px solid var(--ln);border-radius:14px;padding:14px;margin:12px 0}
+.bk{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.cv{width:64px;height:90px;object-fit:cover;border-radius:6px;background:#2c2418;flex:none;display:grid;place-items:center;color:var(--gold);font:700 26px Amiri,serif}
+.bk .t{color:var(--gold);font:700 20px Amiri,serif}.g{flex:1;min-width:130px}
+input,textarea{width:100%;background:#0f0c08;color:var(--tx);border:1px solid var(--ln);border-radius:10px;padding:10px;font-size:16px;margin:5px 0;font-family:inherit}
+.nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:10px 0}.mut{color:var(--mut);font-size:14px}
+iframe{width:100%;height:72vh;border:1px solid var(--ln);border-radius:10px;background:#fff}.im{width:100%;border-radius:12px}
+.adm{border:1px dashed var(--gold)}[hidden]{display:none!important}.logo{width:min(70vw,300px);border-radius:12px}
+:focus-visible{outline:2px solid var(--gold)}
+.mod{position:fixed;inset:0;background:#000b;display:grid;place-items:center;padding:18px;z-index:9}.mod .card{width:100%;max-width:420px;margin:0}
+</style>
+</head>
+<body>
+<section class="pg on c" id="home"><div style="height:6vh"></div>
+<img class="logo" src="logo.jpg" alt="" onerror="this.hidden=true">
+<h1>مرحباً بكم في مبادرة مكتبتنا للنشر والتوزيع</h1>
+<button class="btn" data-go="lib">دخول إلى المكتبة</button></section>
+
+<section class="pg" id="lib"><div class="c"><h2>مكتبتنا للنشر والتوزيع</h2>
+<p>واتساب: <a style="color:var(--gold)" href="https://wa.me/2010XXXXXXXX">010XXXXXXXX</a></p>
+<a class="btn o s" href="https://chat.whatsapp.com/XXXXXXXX">جروب المبادرة</a></div>
+<div class="nav"><button class="btn s" data-go="improv">الارتجال</button><button class="btn o s" id="admBtn">دخول المشرف</button></div>
+<div id="adminBooks" class="card adm" hidden><b>إضافة كتاب</b>
+<input id="bt" placeholder="اسم الكتاب"><input id="ba" placeholder="اسم المؤلف">
+<label class="mut">صورة الغلاف (اختياري)</label><input id="bc" type="file" accept="image/*">
+<label class="mut">ملف الكتاب (PDF)</label><input id="bf" type="file" accept=".pdf">
+<button class="btn s" id="addBookBtn">رفع الكتاب</button> <span id="bs" class="mut"></span></div>
+<input id="q" type="search" placeholder="ابحث باسم الكتاب أو المؤلف">
+<div id="books"></div></section>
+
+<section class="pg" id="read"><div class="nav"><button class="btn o s" data-go="lib">رجوع للمكتبة</button></div>
+<h2 id="rt" class="c"></h2><p id="ra" class="mut c"></p><iframe id="rf" title="الكتاب"></iframe>
+<p class="c"><a id="rd" class="btn s" target="_blank">فتح في صفحة كاملة</a></p></section>
+
+<section class="pg" id="improv"><div class="nav"><button class="btn o s" data-go="lib">رجوع للمكتبة</button></div>
+<h2 class="c">الارتجال</h2><p class="mut c">اختر صورة واكتب عليها خاطرة أو شعراً (من 200 إلى 500 حرف)</p>
+<div id="adminImp" class="card adm" hidden><b>إضافة صورة</b><input id="ic" type="file" accept="image/*">
+<button class="btn s" id="addImpBtn">رفع الصورة</button> <span id="is" class="mut"></span></div>
+<div id="imps"></div></section>
+
+<section class="pg" id="write"><div class="nav"><button class="btn o s" data-go="improv">رجوع</button></div>
+<img id="wi" class="im" alt=""><textarea id="wt" rows="8" placeholder="اكتب هنا..."></textarea>
+<input id="wn" placeholder="اسمك"><div class="mut" id="wc"></div>
+<div class="c"><button class="btn" id="sendBtn" disabled>إرسال عبر واتساب</button></div></section>
+
+<div class="mod" id="mod" hidden><div class="card">
+<h2 class="c">دخول المشرف</h2>
+<label class="mut" for="mr">اسم الريبو (username/repo)</label><input id="mr" dir="ltr" placeholder="username/repo" autocomplete="off">
+<label class="mut" for="mk">GitHub Token</label><input id="mk" type="password" dir="ltr" placeholder="github_pat_..." autocomplete="off">
+<p class="mut" id="mm" role="status"></p>
+<div class="c"><button class="btn" id="mok">تحقق ودخول</button><button class="btn o" id="mno">إلغاء</button></div>
+</div></div>
+<script>
+const WA="2010XXXXXXXX" /* رقم واتساب بصيغة دولية بدون + */,$=i=>document.getElementById(i);
+let repoPath='';try{repoPath=localStorage.getItem('ghrepo')||''}catch(e){}
+if(!repoPath&&location.hostname.endsWith('.github.io')){const r=location.pathname.split('/')[1];repoPath=location.hostname.split('.')[0]+'/'+(r||location.hostname)}
+let books=[],imps=[],cur=null,tok='';try{tok=localStorage.getItem('gh')||''}catch(e){}
+const h=(t,p={},...k)=>{const e=document.createElement(t);for(const[a,v]of Object.entries(p))a==='class'?e.className=v:a.startsWith('on')?e[a]=v:e.setAttribute(a,v);k.flat().forEach(x=>e.append(x));return e};
+function go(p){document.querySelectorAll('.pg').forEach(e=>e.classList.toggle('on',e.id===p));if(p!=='read')$('rf').removeAttribute('src');scrollTo(0,0)}
+document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));
+
+async function load(){
+ try{books=await(await fetch('books.json?'+Date.now())).json()}catch(e){books=[]}
+ try{imps=await(await fetch('improv.json?'+Date.now())).json()}catch(e){imps=[]}
+ rb();ri()}
+function rb(){const q=$('q').value.trim().toLowerCase(),el=$('books');el.replaceChildren();
+ const l=books.filter(b=>!q||(b.title+' '+b.author).toLowerCase().includes(q));
+ if(!l.length){el.append(h('p',{class:'mut c'},books.length?'لا توجد نتائج':'لا توجد كتب بعد'));return}
+ l.forEach(b=>{const d=h('div',{class:'card bk'},
+  b.cover?h('img',{class:'cv',src:b.cover,alt:'',loading:'lazy'}):h('div',{class:'cv'},b.title.charAt(0)),
+  h('div',{class:'g'},h('div',{class:'t'},b.title),h('div',{class:'mut'},'المؤلف: '+b.author)),
+  h('button',{class:'btn s',onclick:()=>{$('rt').textContent=b.title;$('ra').textContent=b.author;$('rf').src=b.file;$('rd').href=b.file;go('read')}},'قراءة'));
+  if(tok)d.append(h('button',{class:'btn o s',onclick:()=>delBook(b)},'حذف'));el.append(d)})}
+function ri(){const el=$('imps');el.replaceChildren();
+ if(!imps.length){el.append(h('p',{class:'mut c'},'لا توجد صور بعد'));return}
+ imps.forEach(m=>{const d=h('div',{class:'card c'},h('img',{class:'im',src:m.img,alt:'',loading:'lazy'}),
+  h('button',{class:'btn s',onclick:()=>{cur=m;$('wi').src=m.img;$('wt').value='';cc();go('write')}},'اكتب على هذه الصورة'));
+  if(tok)d.append(h('button',{class:'btn o s',onclick:()=>delImp(m)},'حذف'));el.append(d)})}
+$('q').oninput=rb;
+
+// ---- GitHub storage (المشرف فقط) ----
+async function gh(path,o={}){const r=await fetch(`https://api.github.com/repos/${repoPath}/contents/${path}`,{...o,headers:{Authorization:'Bearer '+tok,Accept:'application/vnd.github+json'}});
+ if(!r.ok&&r.status!==404)throw new Error(r.status==401?'التوكن غير صحيح':'خطأ '+r.status);return r}
+async function put(path,b64){let sha;const g=await gh(path);if(g.ok)sha=(await g.json()).sha;
+ const r=await gh(path,{method:'PUT',body:JSON.stringify({message:'update '+path,content:b64,sha})});if(!r.ok)throw new Error('فشل الحفظ '+r.status)}
+async function del(path){try{const g=await gh(path);if(g.ok)await gh(path,{method:'DELETE',body:JSON.stringify({message:'delete '+path,sha:(await g.json()).sha})})}catch(e){}}
+async function getJson(p){const g=await gh(p);if(!g.ok)return[];return JSON.parse(decodeURIComponent(escape(atob((await g.json()).content.replace(/\n/g,'')))))}
+const putJson=(p,a)=>put(p,btoa(unescape(encodeURIComponent(JSON.stringify(a,null,1)))));
+const b64=f=>new Promise(r=>{const x=new FileReader();x.onload=()=>r(x.result.split(',')[1]);x.readAsDataURL(f)});
+const ext=f=>(f.name.split('.').pop()||'jpg').toLowerCase().replace(/[^a-z0-9]/g,'');
+
+function showAdmin(){$('adminBooks').hidden=$('adminImp').hidden=!tok;$('admBtn').textContent=tok?'خروج المشرف':'دخول المشرف';rb();ri()}
+$('admBtn').onclick=()=>{
+ if(tok){tok='';try{localStorage.removeItem('gh')}catch(e){}showAdmin();return}
+ $('mr').value=repoPath;$('mk').value='';$('mm').textContent='';$('mod').hidden=false;$('mk').focus()};
+$('mno').onclick=()=>$('mod').hidden=true;
+$('mok').onclick=async()=>{
+ const r=$('mr').value.trim().replace(/^https?:\/\/github\.com\//,'').replace(/\/$/,''),k=$('mk').value.trim(),m=$('mm'),b=$('mok');
+ if(!/^[\w.-]+\/[\w.-]+$/.test(r)){m.textContent='اكتب اسم الريبو بالشكل: username/repo';return}
+ if(!k){m.textContent='الصق التوكن';return}
+ b.disabled=true;m.textContent='جاري التحقق...';
+ try{const x=await fetch('https://api.github.com/repos/'+r,{headers:{Authorization:'Bearer '+k,Accept:'application/vnd.github+json'}});
+  if(x.status===401)throw new Error('التوكن غير صحيح أو منتهي');
+  if(x.status===404)throw new Error('الريبو مش موجود، أو التوكن مش مديله صلاحية على الريبو ده');
+  if(!x.ok)throw new Error('خطأ '+x.status);
+  const j=await x.json();
+  if(!j.permissions||!j.permissions.push)throw new Error('التوكن ملوش صلاحية الكتابة. فعّل Contents: Read and write');
+  tok=k;repoPath=r;try{localStorage.setItem('gh',k);localStorage.setItem('ghrepo',r)}catch(e){}
+  $('mod').hidden=true;showAdmin()}
+ catch(e){m.textContent=e.message==='Failed to fetch'?'مفيش اتصال بالإنترنت':e.message}
+ b.disabled=false};
+
+$('addBookBtn').onclick=async()=>{const t=$('bt').value.trim(),a=$('ba').value.trim(),c=$('bc').files[0],f=$('bf').files[0],s=$('bs'),b=$('addBookBtn');
+ if(!t||!a||!f){s.textContent='أكمل اسم الكتاب والمؤلف وملف PDF';return}
+ if(f.size>25e6){s.textContent='الملف أكبر من 25 ميجا';return}
+ b.disabled=true;s.textContent='جاري الرفع...';
+ try{const id=Date.now(),file='books/'+id+'.pdf',cover=c?'covers/'+id+'.'+ext(c):'';
+  await put(file,await b64(f));if(c)await put(cover,await b64(c));
+  const l=await getJson('books.json');l.unshift({title:t,author:a,file,cover});await putJson('books.json',l);
+  books=l;rb();s.textContent='تم ✓ (يظهر للجميع خلال دقيقة)';['bt','ba','bc','bf'].forEach(i=>$(i).value='')}
+ catch(e){s.textContent=e.message}b.disabled=false};
+$('addImpBtn').onclick=async()=>{const c=$('ic').files[0],s=$('is'),b=$('addImpBtn');if(!c){s.textContent='اختر صورة';return}
+ b.disabled=true;s.textContent='جاري الرفع...';
+ try{const img='improv/'+Date.now()+'.'+ext(c);await put(img,await b64(c));
+  const l=await getJson('improv.json');l.unshift({img});await putJson('improv.json',l);imps=l;ri();s.textContent='تم ✓';$('ic').value=''}
+ catch(e){s.textContent=e.message}b.disabled=false};
+async function delBook(b){if(!confirm('حذف الكتاب؟'))return;try{const l=(await getJson('books.json')).filter(x=>x.file!==b.file);await putJson('books.json',l);
+ await del(b.file);if(b.cover)await del(b.cover);books=l;rb()}catch(e){alert(e.message)}}
+async function delImp(m){if(!confirm('حذف الصورة؟'))return;try{const l=(await getJson('improv.json')).filter(x=>x.img!==m.img);await putJson('improv.json',l);
+ await del(m.img);imps=l;ri()}catch(e){alert(e.message)}}
+
+// ---- الكتابة ----
+function cc(){const n=$('wt').value.trim().length,ok=n>=200&&n<=500;$('wc').textContent=n+' / 500 (الحد الأدنى 200)';$('wc').style.color=ok?'#8fc98f':'#d98a5f';$('sendBtn').disabled=!ok}
+$('wt').oninput=cc;
+$('sendBtn').onclick=()=>{const t=$('wt').value.trim();
+ const msg='✍️ ارتجال - مكتبتنا\nالاسم: '+($('wn').value.trim()||'بدون اسم')+'\n\n'+t+'\n\nالصورة: '+new URL(cur.img,location.href).href;
+ location.href='https://wa.me/'+WA+'?text='+encodeURIComponent(msg)};
+showAdmin();load();
+</script>
+</body>
+</html>
