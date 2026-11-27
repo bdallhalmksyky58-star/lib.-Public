@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>مكتبتنا للنشر والتوزيع</title>
+<title>مكتبة كتب مبادرة ليلك</title>
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#14110d;--card:#1f1a13;--tx:#f3e8cf;--gold:#d9b25f;--mut:#a89874;--ln:#3a3022}
@@ -27,12 +27,16 @@ iframe{width:100%;height:72vh;border:1px solid var(--ln);border-radius:10px;back
 <body>
 <section class="pg on c" id="home"><div style="height:6vh"></div>
 <img class="logo" src="logo.jpg" alt="" onerror="this.hidden=true">
-<h1>مرحباً بكم في مبادرة مكتبتنا للنشر والتوزيع</h1>
+<h1>مرحباً بكم في مكتبة كتب مبادرة ليلك</h1>
 <button class="btn" data-go="lib">دخول إلى المكتبة</button></section>
 
-<section class="pg" id="lib"><div class="c"><h2>مكتبتنا للنشر والتوزيع</h2><p>المكسيكي الجاحد</p>
-<p>واتساب: <a style="color:var(--gold)" href="https://wa.me/201124573377">01124573377</a></p>
-<a class="btn o s" href="https://whatsapp.com/channel/0029VbE1JJF7j6gBvBMhD80P">قناة المبادرة</a></div>
+<section class="pg" id="lib"><div class="c"><h2>مكتبة كتب مبادرة ليلك</h2>
+<p>واتساب: <a style="color:var(--gold)" href="https://wa.me/201064598866">01064598866</a></p>
+<a class="btn o s" href="https://whatsapp.com/channel/0029VbE1JJF7j6gBvBMhD80P">قناة المبادرة</a>
+<a class="btn o s" href="https://chat.whatsapp.com/HapLvvYB6HkGl9qwgcFIjG">كورس شعر</a>
+<a class="btn o s" href="https://www.tiktok.com/@user311613537548">تيك توك</a>
+<a class="btn o s" href="https://www.facebook.com/share/p/1CRCPRpVJy/">أحدث إصدارات المبادرة</a>
+<p class="mut">منشئ المنصة: <a style="color:var(--gold)" href="https://wa.me/layali.december.1.5">المكسيكي</a></p></div>
 <div class="nav"><button class="btn s" data-go="improv">الارتجال</button><button class="btn o s" id="admBtn">دخول المشرف</button></div>
 <div id="adminBooks" class="card adm" hidden><b>إضافة كتاب</b>
 <input id="bt" placeholder="اسم الكتاب"><input id="ba" placeholder="اسم المؤلف">
@@ -65,7 +69,7 @@ iframe{width:100%;height:72vh;border:1px solid var(--ln);border-radius:10px;back
 <div class="c"><button class="btn" id="mok">تحقق ودخول</button><button class="btn o" id="mno">إلغاء</button></div>
 </div></div>
 <script>
-const WA="201124573377" /* رقم واتساب بصيغة دولية بدون + */,$=i=>document.getElementById(i);
+const WA="201064598866" /* رقم واتساب بصيغة دولية بدون + */,$=i=>document.getElementById(i);
 let repoPath='';try{repoPath=localStorage.getItem('ghrepo')||''}catch(e){}
 if(!repoPath&&location.hostname.endsWith('.github.io')){const r=location.pathname.split('/')[1];repoPath=location.hostname.split('.')[0]+'/'+(r||location.hostname)}
 let books=[],imps=[],cur=null,tok='';try{tok=localStorage.getItem('gh')||''}catch(e){}
@@ -148,7 +152,7 @@ function cc(){const n=$('wt').value.trim().length,ok=n>=200&&n<=500;$('wc').text
 $('wt').oninput=cc;
 $('sendBtn').onclick=()=>{const t=$('wt').value.trim();
  const msg='✍️ ارتجال - مكتبتنا\nالاسم: '+($('wn').value.trim()||'بدون اسم')+'\n\n'+t+'\n\nالصورة: '+new URL(cur.img,location.href).href;
- location.href='https://wa.me/'+WA+'?text='+encodeURIComponent(msg)};
+ const u='https://wa.me/'+WA+'?text='+encodeURIComponent(msg);const a=document.createElement('a');a.href=u;a.target='_blank';a.rel='noopener';document.body.appendChild(a);a.click();a.remove()};
 showAdmin();load();
 </script>
 </body>
